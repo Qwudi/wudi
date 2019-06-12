@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  */
 // 声明配置类
 @Configuration
-@MapperScan("com.hwq.wudi.mapper")
+@MapperScan("com.hwq.wudi.*.mapper")
 public class MybatisPlusConfig {
     //覆盖分页组件
     @Bean

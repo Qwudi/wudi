@@ -1,11 +1,14 @@
-
 server:
   port: 8888
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/wuxing?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&aserverTimezone=UTC
+#    家里
+#    url: jdbc:mysql://localhost:3306/wuxing?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&aserverTimezone=UTC
+#   公司
+    url: jdbc:mysql://localhost:3306/huijiankang?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&aserverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
 mybatis-plus:
-  mapper-locations: classpath:/mapper/*.xml
+  mapper-locations: classpath*:/com/hwq/wudi/*/mapper/xml/*.xml
+  type-aliases-package: com.hwq.wudi.*.entity

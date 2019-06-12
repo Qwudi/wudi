@@ -1,7 +1,7 @@
 package com.hwq.wudi;
 
-import com.hwq.wudi.entity.User;
-import com.hwq.wudi.mapper.UserMapper;
+import com.hwq.wudi.members.entity.User;
+import com.hwq.wudi.members.mapper.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

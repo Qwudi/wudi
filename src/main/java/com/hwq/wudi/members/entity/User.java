@@ -1,4 +1,4 @@
-package com.hwq.wudi.entity;
+package com.hwq.wudi.members.entity;
 
 import lombok.Data;
 
