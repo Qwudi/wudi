@@ -1,7 +1,9 @@
 package com.hwq.wudi.members.service;
 
-import com.hwq.wudi.members.entity.Members;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hwq.wudi.members.entity.Members;
 
 /**
  * <p>
@@ -13,4 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IMembersService extends IService<Members> {
 
+    IPage<Members> getMembersPageList(Page page, Members members);
 }
+

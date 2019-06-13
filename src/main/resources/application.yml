@@ -12,3 +12,7 @@ spring:
 mybatis-plus:
   mapper-locations: classpath*:/com/hwq/wudi/*/mapper/xml/*.xml
   type-aliases-package: com.hwq.wudi.*.entity
+  configuration:
+    map-underscore-to-camel-case: true
+#    <!-- 设置当结果集中为null，调用setter(map 为put)方法 -->
+    call-setters-on-nulls: true

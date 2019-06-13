@@ -7,14 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 @RestControllerAdvice
 @Slf4j
-public class GlobleExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobleExceptionHandler {
 
     /**
      * 全局异常处理

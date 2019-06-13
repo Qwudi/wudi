@@ -5,8 +5,7 @@ import com.hwq.wudi.members.entity.User;
 import com.hwq.wudi.members.mapper.UserMapper;
 import com.hwq.wudi.util.RespEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,5 +42,23 @@ public class UserControler {
     public RespEntity page(Page page, Integer age) {
 
         return RespEntity.ok(userMapper.getUserListPage(page,age));
+    }
+
+    @PutMapping("/update/{id}")
+    public RespEntity update(@PathVariable String id){
+        userMapper.updateByIdXml(id);
+        return RespEntity.ok(null);
+    }
+    @PutMapping("/insert")
+    public RespEntity insert(@RequestBody User user){
+        userMapper.insert(user);
+        return RespEntity.ok(null);
+    }
+    @PutMapping("/update2")
+    public RespEntity update2(User user){
+        user.setName("92929");
+        user.setEmail("");
+        userMapper.updateById(user);
+        return RespEntity.ok(null);
     }
 }
