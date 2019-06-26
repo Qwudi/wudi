@@ -9,6 +9,11 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 mybatis-plus:
   mapper-locations: classpath*:/com/hwq/wudi/*/mapper/xml/*.xml
   type-aliases-package: com.hwq.wudi.*.entity
