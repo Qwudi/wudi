@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * 接口返回实体
  */
-@ApiModel("com.haowenqiang.util.respEntityUtil")
+@ApiModel("com.hwq.wudi.util.RespEntity")
 @Data
 public class RespEntity<T> implements Serializable {
     @ApiModelProperty(value = "接口返回信息", name = "msg", example = "请求成功！！！")
