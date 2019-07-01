@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>management</module>
+        <module>wudi-study</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
