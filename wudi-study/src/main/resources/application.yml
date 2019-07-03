@@ -14,3 +14,9 @@ spring:
     port: 5672
     username: guest
     password: guest
+    listener:
+      #消费者关闭自动ack，防止消息丢失
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual

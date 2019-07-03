@@ -1,7 +1,7 @@
 package com.hwq.rabbitmq;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +16,13 @@ import java.util.HashMap;
  * @Description:
  */
 @RestController
+@Slf4j
 public class RabbitMqProviderTest {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
     @Autowired
-    private RabbitAdmin rabbitAdmin;
-
+    private AmqpAdmin amqpAdmin;
     /**
      * direct 类型 ：根据bingding key 完全匹配
      */
@@ -37,9 +37,9 @@ public class RabbitMqProviderTest {
         Exchange myTopic = new TopicExchange("wudi.topic.exchange", true, false);
         FanoutExchange myFanout = new FanoutExchange("wudi.fanout.exchange");
         //创建exchange，可重复执行
-        rabbitAdmin.declareExchange(myDirect);
-        rabbitAdmin.declareExchange(myTopic);
-        rabbitAdmin.declareExchange(myFanout);
+        amqpAdmin.declareExchange(myDirect);
+        amqpAdmin.declareExchange(myTopic);
+        amqpAdmin.declareExchange(myFanout);
 
         //声明queue
         //有多个构造方法，参数：
@@ -54,9 +54,9 @@ public class RabbitMqProviderTest {
         Queue debugQueue = new Queue("wudi.debug");
         Queue infoQue = new Queue("wudi.info", true, false, false);
         Queue errorQueue = new Queue("wudi.error");
-        rabbitAdmin.declareQueue(debugQueue);
-        rabbitAdmin.declareQueue(infoQue);
-        rabbitAdmin.declareQueue(errorQueue);
+        amqpAdmin.declareQueue(debugQueue);
+        amqpAdmin.declareQueue(infoQue);
+        amqpAdmin.declareQueue(errorQueue);
         //创建binding
         //这里第一个参数为要绑定的queue或exchange 同第三个参数exchange绑定
         //exchange 也可以和exchange绑定。
@@ -64,9 +64,9 @@ public class RabbitMqProviderTest {
                 "wudi.direct.exchange", "debugAndInfo", new HashMap<>());
         //BindingBuilder方式创建binding
         Binding infoBinding = BindingBuilder.bind(infoQue).to(myDirect).with("debugAndInfo").and(new HashMap<>());
-        rabbitAdmin.declareBinding(debugBingding);
-        rabbitAdmin.declareBinding(infoBinding);
-        rabbitAdmin.declareBinding(new Binding("wudi.error", Binding.DestinationType.QUEUE, "wudi.direct.exchange", "errorInfo", new HashMap<>()));
+        amqpAdmin.declareBinding(debugBingding);
+        amqpAdmin.declareBinding(infoBinding);
+        amqpAdmin.declareBinding(new Binding("wudi.error", Binding.DestinationType.QUEUE, "wudi.direct.exchange", "errorInfo", new HashMap<>()));
     }
 
     /**
@@ -76,17 +76,17 @@ public class RabbitMqProviderTest {
     public void creatTopic() {
         Exchange myTopic = new TopicExchange("wudi.topic.exchange", true, false);
         //相同的exchange可以重复声明，存在就用已有的，不存在就创建
-        rabbitAdmin.declareExchange(myTopic);
+        amqpAdmin.declareExchange(myTopic);
         //声明俩队列
-        rabbitAdmin.declareQueue(new Queue("wudi.topic1.queue"));
-        rabbitAdmin.declareQueue(new Queue("wudi.topic2.queue"));
+        amqpAdmin.declareQueue(new Queue("wudi.topic1.queue"));
+        amqpAdmin.declareQueue(new Queue("wudi.topic2.queue"));
         //分别绑定到exchange上
         //topic1队列routeing key匹配：xxx.topic1.xxx.xxx.... 和topic1.xxx.xxx....
-        rabbitAdmin.declareBinding(new Binding("wudi.topic1.queue",
+        amqpAdmin.declareBinding(new Binding("wudi.topic1.queue",
                 Binding.DestinationType.QUEUE, "wudi.topic.exchange",
                 "*.topic1.#", new HashMap<>()));
         //topic1队列routeing key匹配：xxx.xxx.topic2.xxx 和xxx.xxx.topic2
-        rabbitAdmin.declareBinding(new Binding("wudi.topic2.queue",
+        amqpAdmin.declareBinding(new Binding("wudi.topic2.queue",
                 Binding.DestinationType.QUEUE, "wudi.topic.exchange",
                 "#.topic2.*", new HashMap<>()));
     }
@@ -97,15 +97,15 @@ public class RabbitMqProviderTest {
     @GetMapping("/fanout")
     public void creatFanout() {
         //相同的exchange可以重复声明，存在就用已有的，不存在就创建
-        rabbitAdmin.declareExchange(new FanoutExchange("wudi.fanout.exchange"));
+        amqpAdmin.declareExchange(new FanoutExchange("wudi.fanout.exchange"));
         //声明俩队列
-        rabbitAdmin.declareQueue(new Queue("wudi.fanout1.queue"));
-        rabbitAdmin.declareQueue(new Queue("wudi.fanout2.queue"));
+        amqpAdmin.declareQueue(new Queue("wudi.fanout1.queue"));
+        amqpAdmin.declareQueue(new Queue("wudi.fanout2.queue"));
         //分别绑定到exchange上
-        rabbitAdmin.declareBinding(new Binding("wudi.fanout1.queue",
+        amqpAdmin.declareBinding(new Binding("wudi.fanout1.queue",
                 Binding.DestinationType.QUEUE, "wudi.fanout.exchange",
                 "fanout", new HashMap<>()));
-        rabbitAdmin.declareBinding(new Binding("wudi.fanout2.queue",
+        amqpAdmin.declareBinding(new Binding("wudi.fanout2.queue",
                 Binding.DestinationType.QUEUE, "wudi.fanout.exchange",
                 "fanout", new HashMap<>()));
     }
@@ -119,6 +119,10 @@ public class RabbitMqProviderTest {
     @PostMapping("/send")
     public void send(String msg,String routingKey,String exchangeName){
         //一般情况消息都是传json字符串，自动转换为message对象。
-        rabbitTemplate.convertAndSend(exchangeName, routingKey, msg);
+//        rabbitTemplate.convertAndSend(exchangeName, routingKey, JSON.toJSONString(msg));
+        if(log.isDebugEnabled()){
+            log.debug("向【{}】交换器发送routing key 为【{}】的消息：【{}】",exchangeName,routingKey,msg);
+        }
+        RabbitMqUtil.sendJsonMsg(exchangeName, routingKey, msg);
     }
 }
