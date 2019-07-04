@@ -16,7 +16,10 @@ spring:
     password: guest
     listener:
       #消费者关闭自动ack，防止消息丢失
-      direct:
-        acknowledge-mode: manual
       simple:
         acknowledge-mode: manual
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 5000ms
+        default-requeue-rejected: false

@@ -37,15 +37,16 @@ public class RabbitMqUtil {
             Message message = MessageBuilder.withBody(JSON.toJSONString(msg).getBytes())
                     .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)
                     .setContentEncoding("utf-8")
+                    //这里messageid是消息唯一标识，用于消费者消费失败手动ack的时候 判断重试次数
                     .setMessageId(unique)
                     .build();
+            //最后一个参数是为了在生产者发消息失败时的回调中取得消息标识。
             rabbitTemplate.send(exchangeName, routingKey, message,new CorrelationData(unique));
         } catch (AmqpException e) {
             e.printStackTrace();
         }
         return true;
     }
-
 
     /**
      * 生产消息到队列中
