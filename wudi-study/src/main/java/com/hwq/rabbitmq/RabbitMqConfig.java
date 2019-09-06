@@ -46,10 +46,11 @@ public class RabbitMqConfig {
         return new Binding("pay", Binding.DestinationType.QUEUE,
                 "wudi.direct.exchange", "pay", new HashMap());
     }
-
+    //如果设置了retry:enabled: true  重试最大次数后，仍然报错，会调用此方法。转发，
+    //但消息除了会转发，也回原队列，等待重新推送，这样容易造成重复消费的问题。
     @Bean
     public MessageRecoverer messageRecoverer(RabbitTemplate rabbitTemplate) {
-        RepublishMessageRecoverer recoverer = new RepublishMessageRecoverer(rabbitTemplate, "wudi.direct.exchange", "order");
+        RepublishMessageRecoverer recoverer = new RepublishMessageRecoverer(rabbitTemplate, "wudi.direct.exchange", "error");
         return recoverer;
     }
 }

@@ -15,11 +15,22 @@ spring:
     username: guest
     password: guest
     listener:
-      #消费者关闭自动ack，防止消息丢失
       simple:
+        #消费者关闭自动ack，防止消息丢失
         acknowledge-mode: manual
-        retry:
-          enabled: true
-          max-attempts: 3
-          initial-interval: 5000ms
-        default-requeue-rejected: false
+        #单个消费者最多未确认ack的消息数量
+        prefetch: 1
+#        # 并发消费
+#        concurrency: 5
+#        max-concurrency: 10
+#        #最后一次重试如果仍然异常，是否把消息放回队列，这里手动确认不好使，可以不设置
+#        #可以结合死信队列，开启自动ack时，这个配置才会生效
+#        default-requeue-rejected: false
+#        retry:
+#          #开启retry重试机制
+#          enabled: true
+#          #最大重试次数
+#          max-attempts: 3
+#          #每次重试间隔时间
+#          initial-interval: 5000ms
+

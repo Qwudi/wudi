@@ -1,8 +1,7 @@
 package spring.config;
 
 import com.hwq.StudyApplication;
-import com.hwq.spring.config.BenzCar;
-import com.hwq.spring.config.Car;
+import com.hwq.rabbitmq.RabbitMqProviderTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +17,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(classes = StudyApplication.class)
 public class AnnotationTest {
     @Autowired
-    private Car car;
-    @Autowired
-    private BenzCar benzCar;
+    private RabbitMqProviderTest rabbitMqProviderTest;
 
     @Test
     public void test1(){
-        System.out.println(car.getBenzCar() == benzCar);
+        for (int i = 0; i<4 ;i++) {
+            rabbitMqProviderTest.send("支付完成", "pay", "wudi.direct.exchange");
+        }
     }
+
+
+
 }

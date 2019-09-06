@@ -13,8 +13,11 @@ public class Test {
     public static void test1(){
         float a = 1.0f - 0.9f;
         float b = 0.9f - 0.8f;
+        float c = 0.9f - 0.8f;
         System.out.println(a);
         System.out.println(b);
+        System.out.println(c);
+        System.out.println(1-0.9);
         if(a == b){
             System.out.println("true");
         }else{
@@ -22,8 +25,8 @@ public class Test {
         }
     }
     public static void test2(){
-        Float a = Float.valueOf(1.0f-0.9f);
-        Float b = Float.valueOf(0.9f-0.8f);
+        Float a = 1.0f - 0.9f;
+        Float b = 0.9f - 0.8f;
         System.out.println(a);
         System.out.println(b);
         System.out.println(Float.floatToIntBits(a));
@@ -35,7 +38,7 @@ public class Test {
         }
     }
     public static void test3() {
-        String param = null;
+        String param = "null";
         switch (param) {
             case "null":
                 System.out.println("null");
@@ -45,7 +48,7 @@ public class Test {
         }
     }
     public static void test4() {
-        BigDecimal b = new BigDecimal(0.1);
+        BigDecimal b = new BigDecimal("0.1");
     }
     public static int[][] flipAndInvertImage(int[][] A) {
         for(int i = 0;i < A.length; i++){
@@ -71,10 +74,10 @@ public class Test {
         String[] m = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
         String[] words = {"gin", "zen", "gig", "msg"};
         Set<String> s = new HashSet<>();
-        for(int i = 0;i<words.length;i++){
+        for (String word : words) {
             StringBuilder sb = new StringBuilder();
-            for(int j = 0;j<words[i].length();j++){
-                sb.append(m[words[i].charAt(j)-'a']);
+            for (int j = 0; j < word.length(); j++) {
+                sb.append(m[word.charAt(j) - 'a']);
             }
             s.add(sb.toString());
         }
@@ -82,12 +85,6 @@ public class Test {
 
     }
     public static void main(String[] args) {
-//        test1();
-//        char a = ')';
-//
-//        System.out.println(a == ')');
-//        int[][] A = {{1,1,0},{1,0,1},{0,0,0}};
-//        flipAndInvertImage(A);
         test5();
     }
 }
