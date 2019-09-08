@@ -1,6 +1,7 @@
 package com.hwq.wudi.members.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hwq.wudi.config.datasource.DataSource;
 import com.hwq.wudi.members.entity.User;
 import com.hwq.wudi.members.mapper.UserMapper;
 import com.hwq.wudi.util.RespEntity;
@@ -21,6 +22,7 @@ public class UserControler {
     private UserMapper userMapper;
 
     @GetMapping("/list")
+    @DataSource("master")
     public RespEntity getUserList(){
         List<User> userList = userMapper.selectList(null);
         userList.forEach(System.out::println);
@@ -28,6 +30,7 @@ public class UserControler {
     }
     //自带的分页
     @GetMapping("/page1")
+    @DataSource("slave1")
     public RespEntity page(Page page, boolean listMode) {
         if (listMode) {
             // size 小于 0 不在查询 total 及分页，自动调整为列表模式。
@@ -45,6 +48,7 @@ public class UserControler {
     }
 
     @PutMapping("/update/{id}")
+    @DataSource("slave1")
     public RespEntity update(@PathVariable String id){
         userMapper.updateByIdXml(id);
         return RespEntity.ok(null);
