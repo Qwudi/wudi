@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @Auther: haowenqiang
- * @Date: 2019/7/2
  * @Description:
  */
 @Component

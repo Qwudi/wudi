@@ -4,7 +4,6 @@ import lombok.Data;
 
 /**
  * @Auther: haowenqiang
- * @Date: 2019/8/14
  * @Description:
  */
 @Data

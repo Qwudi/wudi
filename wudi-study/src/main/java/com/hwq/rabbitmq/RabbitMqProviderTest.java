@@ -12,7 +12,6 @@ import java.util.HashMap;
 
 /**
  * @Auther: haowenqiang
- * @Date: 2019/7/1
  * @Description:
  */
 @RestController

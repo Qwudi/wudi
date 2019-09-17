@@ -4,7 +4,6 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * @Auther: haowenqiang
- * @Date: 2019/9/6
  * @Description:
  */
 public class CountDownLanchDemo {

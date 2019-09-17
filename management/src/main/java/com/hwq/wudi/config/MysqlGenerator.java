@@ -13,7 +13,6 @@ import java.util.Scanner;
 
 /**
  * @Auther: haowenqiang
- * @Date: 2019/6/12
  * @Description: 代码生成器
  */
 public class MysqlGenerator {
