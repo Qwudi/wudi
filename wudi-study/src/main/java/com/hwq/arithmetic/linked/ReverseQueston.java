@@ -3,6 +3,7 @@ package com.hwq.arithmetic.linked;
 /**
  * @Auther: haowenqiang
  * @Description:链表反转
+ * 随便提一下，测试giteegit
  */
 public class ReverseQueston {
     //遍历
