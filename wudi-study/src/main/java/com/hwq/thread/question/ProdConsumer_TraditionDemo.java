@@ -5,6 +5,7 @@ package com.hwq.thread.question;
  * @Description:
  * 传统版的消费者生产者模式
  * 题目 ： 一个初始值为0的变量，两个线程交替操作，一个加1一个减1，循环5次
+ * 生产一个消费一个，同一时间最多只有一个
  */
 
 public class ProdConsumer_TraditionDemo {
@@ -15,7 +16,9 @@ public class ProdConsumer_TraditionDemo {
         while (num != 0) {
             this.wait();
         }
+        //干活
         num++;
+        //通知
         System.out.printf("线程[%s]加:\t[%s] \n",Thread.currentThread().getName(),num);
         this.notify();
     }
