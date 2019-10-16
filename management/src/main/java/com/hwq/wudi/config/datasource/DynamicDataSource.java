@@ -5,7 +5,6 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
  * @Auther: haowenqiang
- * @Date: 2019/9/2
  * @Description:
  */
 @Slf4j

@@ -2,7 +2,6 @@ package com.hwq.thread.question;
 
 /**
  * @Auther: haowenqiang
- * @Date: 2019/8/30
  * @Description:
  */
 public class DeadLock {

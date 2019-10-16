@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Update;
 
 /**
  * @Auther: haowenqiang
- * @Date: 2019/6/11 0011 23:13
  * @Description:
  */
 public interface UserMapper extends BaseMapper<User> {

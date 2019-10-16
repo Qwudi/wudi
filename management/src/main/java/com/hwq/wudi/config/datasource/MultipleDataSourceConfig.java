@@ -2,7 +2,6 @@ package com.hwq.wudi.config.datasource;
 
 /**
  * @Auther: haowenqiang
- * @Date: 2019/9/2
  * @Description:
  */
 
