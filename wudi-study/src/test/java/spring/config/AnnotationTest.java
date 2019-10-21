@@ -2,6 +2,7 @@ package spring.config;
 
 import com.hwq.StudyApplication;
 import com.hwq.rabbitmq.RabbitMqProviderTest;
+import com.hwq.redis.SimpleLimiter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class AnnotationTest {
         }
     }
 
-
+    @Test
+    public void test2(){
+        for (int i = 0; i<10 ;i++) {
+            System.out.println(SimpleLimiter.isAllowOperation("ccc", 60, 5));
+        }
+    }
 
 }

@@ -9,7 +9,7 @@ package com.hwq.arithmetic.array;
  * 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。
  * 你不需要考虑数组中超出新长度后面的元素。
  */
-public class RemoveRepeat {
+public class RemoveDuplicates26 {
     //思路:快慢指针法。遍历数组，fast每遍历一次走一步，
     //slow只有在与fast所指元素值不相等时走一步，同时将fast的元素值值赋给slow的元素值
     //slow始终指向不同元素数组的末尾。
@@ -24,7 +24,12 @@ public class RemoveRepeat {
         return slow + 1;
     }
     public static void main(String[] args) {
-        int[] nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-        System.out.println(removeRepeat(nums));
+//        int[] nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+//        System.out.println(removeRepeat(nums));
+        int a = 255555555;
+        int b = 2000000000;
+        int c = a+b;
+        
+
     }
 }

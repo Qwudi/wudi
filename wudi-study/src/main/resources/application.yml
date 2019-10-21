@@ -5,7 +5,7 @@ spring:
 ##    家里
 #    url: jdbc:mysql://localhost:3306/wuxing?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&aserverTimezone=UTC&useSSL=false
 #   公司
-    url: jdbc:mysql://localhost:3306/huijiankang?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&aserverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://localhost:3306/huijiankang?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
@@ -33,4 +33,17 @@ spring:
 #          max-attempts: 3
 #          #每次重试间隔时间
 #          initial-interval: 5000ms
-
+  redis:
+    host: 10.0.97.112
+    port: 6379
+    database: 5
+    jedis:
+      pool:
+      #最大连接个数
+        max-active: 10
+        #等待时间
+        max-wait: 6000ms
+        #最大空闲
+        max-idle: 8
+        #初始化最小
+        min-idle: 5
