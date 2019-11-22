@@ -15,6 +15,7 @@ import java.util.List;
  * @Description:
  */
 @RestController()
+@RequestMapping("/user")
 public class UserControler {
 
     @Autowired
