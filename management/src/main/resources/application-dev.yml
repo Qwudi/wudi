@@ -6,17 +6,17 @@ spring:
 ##    one
 #    url: jdbc:mysql://localhost:3306/wuxing?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&aserverTimezone=UTC&useSSL=false
 #   two
-      url: jdbc:mysql://localhost:3306/huijiankang?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT
+      url: jdbc:mysql://localhost:3306/hmnewproject?useUnicode=yes&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: 123456
     slave1:
-      url: jdbc:mysql://localhost:3306/hmnewproject?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT
+      url: jdbc:mysql://localhost:3306/hmnewproject?useUnicode=yes&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: 123456
     slave2:
-      url: jdbc:mysql://localhost:3306/huijiankang?Unicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT
+      url: jdbc:mysql://localhost:3306/hmnewproject?useUnicode=yes&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: 123456

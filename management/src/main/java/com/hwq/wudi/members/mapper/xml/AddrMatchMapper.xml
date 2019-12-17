@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwq.wudi.members.mapper.AddrMatchMapper">
+
+
+    <select id="getAllProvince" resultType="com.hwq.wudi.members.entity.Addr">
+        SELECT code,name,iv_code from zt_kxd_addr where lv = '1'
+    </select>
+
+    <select id="getMkChildren" resultType="com.hwq.wudi.members.entity.Addr">
+        SELECT code,name from zt_kxd_addr where parent_code = #{ids}
+    </select>
+
+    <select id="getIvChildren2" resultType="com.hwq.wudi.members.entity.Addr">
+        SELECT ar_nm as name,ar_mcls_id as iv_code,ar_nm AS iv_name from cmm_zip_no_ar_m where ar_lcls_id = #{ivCode} and ar_lvl = '2'
+    </select>
+
+    <select id="getIvChildren3" resultType="com.hwq.wudi.members.entity.Addr">
+        SELECT ar_nm as name,ar_scls_id as iv_code,ar_nm AS iv_name from cmm_zip_no_ar_m where ar_mcls_id = #{ivCode} and ar_lvl = '3';
+    </select>
+
+    <update id="updateAddr" parameterType="com.hwq.wudi.members.entity.Addr">
+        update zt_kxd_addr set iv_code = #{ivCode},iv_name = #{ivName} where code = #{code}
+    </update>
+    <update id="updateAllProvince">
+        UPDATE zt_kxd_addr
+        SET iv_code = (
+            SELECT ar_lcls_id
+            FROM
+                cmm_zip_no_ar_m
+            WHERE
+                ar_nm LIKE CONCAT('%', NAME, '%')
+                AND ar_lvl = 1
+        ),
+            iv_name = (
+                SELECT ar_nm
+                FROM
+                    cmm_zip_no_ar_m
+                WHERE
+                    ar_nm LIKE CONCAT('%', NAME, '%')
+                    AND ar_lvl = 1
+            )
+        WHERE
+            lv = '1'
+    </update>
+</mapper>
